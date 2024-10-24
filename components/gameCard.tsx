@@ -1,6 +1,7 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import {Game} from "../types"
+import Score from "./score"
 
 interface GameProps {
   game: Game
@@ -8,11 +9,13 @@ interface GameProps {
 
 const GameCard = ({game}: GameProps) => {
   return (
-    <View key={game.slug} style={styles.card}>
+    <View key={game.slug} className='flex-row bg-slate-500/10 p-4 rounded-xl gap-4 mb-10'>
       <Image source={{ uri: game.image }} style={styles.image} />
-      <Text style={styles.title}>{game.title}</Text>
-      <Text style={styles.score}>{game.score}</Text>
-      <Text style={styles.description}>{game.description}</Text>
+      <View>
+        <Text className="mb-1" style={styles.title}>{game.title}</Text>
+        <Score score={game.score} maxScore={100} />
+        <Text className="mt-2 flex-shrink" style={styles.description}>{game.description.slice(0,100)}...</Text>
+      </View>
     </View>
   )
 }
